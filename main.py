@@ -9,10 +9,16 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+# @app.get("/", response_class=HTMLResponse)
+# async def index(request: Request):
+#     print('Request for index page received')
+#     return templates.TemplateResponse('index.html', {"request": request})
+
 @app.get("/", response_class=HTMLResponse)
-async def index(request: Request):
+async def index():
+    hello = 'Hello World!'
     print('Request for index page received')
-    return templates.TemplateResponse('index.html', {"request": request})
+    return hello
 
 @app.get('/favicon.ico')
 async def favicon():
